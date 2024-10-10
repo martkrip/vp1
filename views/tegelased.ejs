@@ -10,11 +10,16 @@
  <ul>
     <li><a href="/timenow">Ajainfo</a></li>
     <li><a href="/vanasonad">Vanasõnad</a></li>
-    <li><a href ="/regvisit">Registreeri oma nime (txt põhine)</li>
-    <li><a href ="/regvisitdb">Registreeri oma nime</li>
+    <li><a href ="/regvisit">Registreeri oma nime</a></li>
     <li><a href ="/eestifilm">Eesti film</a></li>
-    <li><a href ="/eestifilm/tegelased">Tegelased</a></li>
  </ul>
+ <hr>
+ <h2>Eesti filmitegelased</h2>
+ <ul>
+  <% persons.forEach(function(item){ %>
+    <li><%= item.first_name %> <%= item.last_name %>, sündinud <%= item.birth_date %></li>
+    <% }); %>
 
+ </ul>
 </body>
 </html>

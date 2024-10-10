@@ -14,13 +14,12 @@
 <h2>Pane oma nimi kirja</h2>
 <form method="POST"> 
     <label for="firstNameInput">Eesnimi: </label>
-    <input type ="text" id="firstNameInput" name ="firstNameInput" placeholder= "Eesnimi ...">
+    <input type ="text" id="firstNameInput" name ="firstNameInput" placeholder= "Eesnimi ..." value="<%= firstName %>">
     <br>
     <label for="firstNameInput">Perekonnanimi: </label>
-    <input type ="text" id="lastNameInput" name ="lastNameInput" placeholder= "Perekonnanimi... ">
+    <input type ="text" id="lastNameInput" name ="lastNameInput" placeholder= "Perekonnanimi... " value ="<%= lastName %>">
     <input type="submit" id="regSubmit" name ="regSubmit" value="Salvesta">
-    
   </form>
-
+  <p><%= notice %></p>
 </body>
 </html>
