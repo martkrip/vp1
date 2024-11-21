@@ -10,18 +10,21 @@
  <ul>
    <li><a href="/home">Avaleht</a></li>
  <ul>
-    <li><a href="/timenow">Ajainfo</a></li>
-    <li><a href="/vanasonad">Vanasõnad</a></li>
-    <li><a href ="/regvisit">Registreeri oma nime</a></li>
-    <li><a href ="/eestifilm">Eesti film</a></li>
-    <li><a href ="/eestifilm/lisaSeos">Lisa seos</a></li>
+    <li><a href ="/eestifilm">Eesti filmi avaleht</a></li>
  </ul>
  <hr>
- <h2>Eesti filmitegelased</h2>
+ <h2>Lisa seoseid</h2>
+ <form method="POST">
+   <label for="personSelect">Vali isik</label>
+   <select id="personSelect" name="personSelect" 
+      <option selected disabled>Vali isik</option>
+      <option value = "1">Ervin Abel</option>
+   </select>
+ </form>
  <ul>
-  <% persons.forEach(function(item){ %>
+<!--   <% persons.forEach(function(item){ %>
     <li><%= item.first_name %> <%= item.last_name %>, sündinud <%= item.birth_date %></li>
-    <% }); %>
+    <% }); %> -->
 
  </ul>
 </body>

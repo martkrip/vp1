@@ -10,7 +10,7 @@ const multer = require("multer");
 const sharp = require("sharp");
 const bcrypt = require("bcrypt")
 const session = require("express-session")
-
+const async = require("async");
 const app = express();
 app.use(session({secret: "kass", saveUninitialized: true, resave: true}));
 app.set("view engine", "ejs");
@@ -19,7 +19,6 @@ app.use(express.static("public"));
 app.use(bodyparser.urlencoded({extended: true})); //dekodeeri asju
 //seadistame vahevara multer fotoode laadimiseks kindlasse kataloogi
 const upload = multer({dest: "./public/gallery/orig/"});
-
 //loon andmebaasiühendus
 const conn = mysql.createConnection({
     host: dbInfo.configData.host,
@@ -27,7 +26,6 @@ const conn = mysql.createConnection({
     password: dbInfo.configData.passWord,
     database: "if24_mart_krip"
 })
-
 const checkLogin = function(req, res, next){
     if(req.session != null){
         if (req.session.userId){
@@ -202,8 +200,10 @@ app.get("/", (req,res)=>{
     res.render("index",{days: dtEt.daysBetween("9-2-2024")}) //veel ei ole kasutuses
 }); 
 
-app.get("/addnews", (req, res)=>{
-    let notice = "";
+const newsRoutes = require("./routes/newsRoutes");
+app.use("/news", newsRoutes);
+//app.get("/news/addnews", (req, res)=>{
+/*     let notice = "";
     let titleInput = "";
     let newsInput = "";
     let expireInput = "";
@@ -211,7 +211,7 @@ app.get("/addnews", (req, res)=>{
 
 });
 
-app.post("/addnews", (req, res)=>{
+app.post("/news/addnews", (req, res)=>{
     let notice = "";
     let titleInput = "";
     let newsInput = "";
@@ -235,7 +235,7 @@ app.post("/addnews", (req, res)=>{
             }
     }); 
 });
-
+ */
 app.get("/photoupload", (req, res)=>{
     res.render("photoupload");
 });
@@ -404,5 +404,63 @@ app.get("/gallery", (req, res)=>{
 	});
 	//res.render("gallery");
 });
-
+/* app.get("/news", checkLogin, (req, res)=>{
+    console.log("news" + req.session.userId)
+    let notice = ""
+    res.render("news")
+})
+app.post("/news", (req, res)=>{
+    console.log("news")
+    let notice = ""
+    res.render("news")
+})
+*/
+app.get("/eestifilm/lisaSeos", (req,res)=>{
+    //võtan kasutusele async mooduli, et korraga teha mitu andmebaasipäringut
+    const filmQueries = [
+        function(callback){
+            let sqlReq1 = "SELECT id, first_name, last_name, birth_date FROM person";
+            conn.execute(sqlReq1, (err, result)=>{
+                if(err){
+                    return callback(err);
+                }
+                else {
+                    return callback(null, result);
+                }
+            });
+        },
+    function(callback){
+        let sqlReq2 = "SELECT id, title, production_year FROM movie";
+        conn.execute(sqlReq2, (err, result)=>{
+            if(err){
+                return callback(err);
+            }
+            else {
+                return callback(null, result);
+            }
+        });
+    },
+    function(callback){
+    let sqlReq3 = "SELECT id, position_name FROM position";
+    conn.execute(sqlReq3, (err, result)=>{
+        if(err){
+            return callback(err);
+        }
+        else {
+            return callback(null, result);
+        }
+    });
+}]
+//paneme need päringud ehk siis funktsioonid paralleelselt käima, tulemuseks saame kolme päringu koondi
+    async.parallel(filmQueries, (err, results)=>{
+        if(err){
+            throw err;
+        }
+        else{
+            console.log(results);
+            res.render("addRelations", {personList: results[0], movieList: results[1], positionList: results[2]})
+        }
+    })
+    //res.render("addRelations");
+    });
 app.listen(5127);
