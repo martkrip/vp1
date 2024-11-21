@@ -1,0 +1,1 @@
+CREATE TABLE `if24_mart_krip`.`vp1news` (`id` INT(11) NOT NULL AUTO_INCREMENT , `news_title` VARCHAR(100) NOT NULL , `news_text` TEXT NOT NULL , `news_date` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP , `expire_date` DATE NOT NULL , `user_id` INT NOT NULL , PRIMARY KEY (`id`)) ENGINE = InnoDB; 

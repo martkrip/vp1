@@ -18,10 +18,16 @@ const weekDayEt = function(){
 }
 const timeFormattedET = function(){
     let timeNow = new Date();
+    //let specDate = new Date("12-27-39");
     let hourNow = timeNow.getHours();
     let minuteNow = timeNow.getMinutes();
     let secondNow = timeNow.getSeconds();
     return hourNow + ":" + minuteNow + ":" + secondNow;
+}
+
+const givenTimeFormatted = function(gDate){ //peab uhh kella sättima õigeks?
+    let specDate = new Date(gDate);
+    return specDate.getDate() + ". " + monthNamesEt[specDate.getMonth()] + " " + specDate.getFullYear();
 }
 const partOfDayEt = function(){
     let dayPart = "suvaline hetk";
@@ -47,4 +53,4 @@ const partOfDayEt = function(){
     return dayPart;
 
 }
-module.exports = {monthsEt: monthNamesEt, weekdaysEt: weekdayNamesEt, dateEt: DateEt, weekDayEt: weekDayEt, timeEt: timeFormattedET, partOfDayEt};
+module.exports = {monthsEt: monthNamesEt, weekdaysEt: weekdayNamesEt, dateEt: DateEt, weekDayEt: weekDayEt, timeEt: timeFormattedET, partOfDayEt, givenTimeFormatted: givenTimeFormatted};

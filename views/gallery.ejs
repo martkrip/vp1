@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf=8">
+  <title> Martin Toomas Kripsaar </title>
+  <link rel="stylesheet" href ="/style/gallery.css">
+  <link rel="stylesheet" href ="/style/modal.css">
+  <script src="/script/gallery.js" defer></script>
+</head>
+<body>
+ <img src="/banners/vp_banner_2024.png" alt="Veebiprogrammeerimise 2024 aasta kursuse bänner">
+ <p> See leht on tehtud õppetöö raames  <a href="https://www.tlu.ee" target="_blank">Tallinna ülikoolis</a> ja ei sisalda tõsiseltvõetavat sisu </p>
+ <hr>
+ <ul>
+    <li><a href="/home">Avaleht</a></li>
+ </ul>
+ <hr>
+ <dialog id="modal" class="modalarea">
+  <span id="modalClose" class ="modalclose">&times;</span>
+  <div class="modalhorizontal">
+    <div class ="modalvertical">
+      <p id="modalCaption"></p>
+      <img id="modalImage" src="/pics/empty.png" alt="galeriipilt">
+    </div>
+  </div>
+ </dialog>
+<h2>Fotogalerii</h2>
+<div id="gallery" class="gallery">
+  <% listData.forEach(function(image) { %>
+    <img src="<%= image.href %><%= image.fileName %>" alt="<%= image.alt %>" class="thumbs" data-fileName="<%= image.fileName %>">
+    <% }); %>
+</div>
+</body>
+</html>
