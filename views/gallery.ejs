@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf=8">
+  <meta charset="utf-8">
   <title> Martin Toomas Kripsaar </title>
   <link rel="stylesheet" href ="/style/gallery.css">
   <link rel="stylesheet" href ="/style/modal.css">
@@ -25,9 +25,11 @@
   </div>
  </dialog>
 <h2>Fotogalerii</h2>
+<p><%- locals.links %></p>
 <div id="gallery" class="gallery">
-  <% listData.forEach(function(image) { %>
-    <img src="<%= image.href %><%= image.fileName %>" alt="<%= image.alt %>" class="thumbs" data-fileName="<%= image.fileName %>">
+
+  <% listData.forEach(function(image){ %>
+    <img src="<%= image.href %>" alt="<%= image.alt %>" class="thumbs" data-filename="<%= image.fileName %>">
     <% }); %>
 </div>
 </body>

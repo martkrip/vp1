@@ -2,6 +2,7 @@ window.onload = function() {
     let allThumbs = document.querySelector("#gallery").querySelectorAll(".thumbs")
     for (let i = 0; i < allThumbs.length; i ++){
         allThumbs[i].addEventListener("click", openModal);
+        console.log(allThumbs[i].dataset.filename);
     }
     document.querySelector("#modalClose").addEventListener("click", closeModal);
 }
@@ -9,12 +10,12 @@ window.onload = function() {
 function openModal(e){
     console.log(e)
     document.querySelector("#modalCaption").innerHTML = e.target.alt;
-    document.querySelector("#modalImage").src = "/gallery/normal/" + e.target.dataset.fileName;
+    document.querySelector("#modalImage").src = "/gallery/normal/" + e.target.dataset.filename;
     document.querySelector("#modal").showModal();
 }
 
 function closeModal(){
     document.querySelector("#modal").close();
     document.querySelector("#modalImage").src = "pics/empty.png";
-    Document.querySelector("#modalCaption").innerHTML = "galeriipilt";
+    document.querySelector("#modalCaption").innerHTML = "galeriipilt";
 }

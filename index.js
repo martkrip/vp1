@@ -95,7 +95,8 @@ app.post("/", (req, res)=>{
                 else {
                     console.log("6");
                     notice = "Kasutajatunnus ja/või parool on vale!";
-                    res.render("index",{days: dtEt.daysBetween("9-2-2024"), notice:notice});
+                    //res.render("index",{days: dtEt.daysBetween("9-2-2024"), notice:notice});
+                    res.render("index",{days: 100, notice:notice});
                 }
             }
         });//conn.execute lõppeb
@@ -386,7 +387,7 @@ app.get("/logout", (req, res)=>{
     res.redirect("/");
 });
 
-app.get("/gallery", (req, res)=>{
+/* app.get("/gallery", (req, res)=>{
 	let sqlReq = "SELECT file_name, alt_text FROM vp1photos WHERE privacy = ? AND deleted IS NULL ORDER BY id DESC";
 	const privacy = 3;
 	let photoList = [];
@@ -403,7 +404,7 @@ app.get("/gallery", (req, res)=>{
 		}
 	});
 	//res.render("gallery");
-});
+}); */
 /* app.get("/news", checkLogin, (req, res)=>{
     console.log("news" + req.session.userId)
     let notice = ""
@@ -463,4 +464,8 @@ app.get("/eestifilm/lisaSeos", (req,res)=>{
     })
     //res.render("addRelations");
     });
+
+const galleryRouter = require("./routes/galleryRoutes")
+app.use("/gallery", galleryRouter);
+
 app.listen(5127);
